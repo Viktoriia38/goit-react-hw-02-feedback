@@ -11,16 +11,9 @@ export class App extends Component {
     bad: 0,
   };
 
-  handleCountGoodChange = () => {
-    this.setState(prevState => ({ good: prevState.good + 1 }));
-  };
-
-  handleCountNeutralChange = () => {
-    this.setState(prevState => ({ neutral: prevState.neutral + 1 }));
-  };
-
-  handleCountBadChange = () => {
-    this.setState(prevState => ({ bad: prevState.bad + 1 }));
+  onLeaveFeedback = e => {
+    const { name } = e.target;
+    this.setState(prevState => ({ [name]: prevState[name] + 1 }));
   };
 
   countTotalFeedback = () => {
@@ -37,9 +30,8 @@ export class App extends Component {
       <>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            handleCountGoodChange={this.handleCountGoodChange}
-            handleCountNeutralChange={this.handleCountNeutralChange}
-            handleCountBadChange={this.handleCountBadChange}
+            onLeaveFeedback={this.onLeaveFeedback}
+            options={Object.keys(this.state)}
           />
         </Section>
         <Section title="Statistics">
